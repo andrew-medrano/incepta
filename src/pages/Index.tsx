@@ -93,11 +93,13 @@ const Index = () => {
               <div className="relative">
                 <TypeAnimation
                   sequence={[
-                    "Search for AI patents...",
+                    "Ask Incepta to find AI patents in healthcare...",
                     2000,
-                    "Find research grants...",
+                    "Ask Incepta to discover green energy research grants...",
                     2000,
-                    "Discover university IP...",
+                    "Ask Incepta to analyze biotech funding opportunities...",
+                    2000,
+                    "Ask Incepta to explore quantum computing innovations...",
                     2000
                   ]}
                   wrapper="div"
