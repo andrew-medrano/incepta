@@ -35,19 +35,24 @@ const Index = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-purple-900 to-purple-800 text-white">
+    <div className="min-h-screen bg-gradient-to-b from-purple-200 to-purple-100 text-purple-900">
       {/* Header Navigation */}
-      <header className="bg-purple-900/50 backdrop-blur-md border-b border-purple-700/50 sticky top-0 z-50">
+      <header className="bg-white/70 backdrop-blur-md border-b border-purple-200 sticky top-0 z-50">
         <nav className="container mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
+              <img 
+                src="/lovable-uploads/b7a6d977-e43d-451e-8150-3eb9173e99e2.png"
+                alt="Incepta Logo"
+                className="w-8 h-8"
+              />
               <span className="text-xl font-semibold">Incepta</span>
             </div>
             <div className="flex items-center space-x-8">
-              <Link to="/" className="hover:text-purple-200 transition-colors">Home</Link>
-              <Link to="/about" className="hover:text-purple-200 transition-colors">About</Link>
-              <Link to="/pricing" className="hover:text-purple-200 transition-colors">Pricing</Link>
-              <Link to="/contact" className="hover:text-purple-200 transition-colors">Contact</Link>
+              <Link to="/" className="hover:text-purple-600 transition-colors">Home</Link>
+              <Link to="/about" className="hover:text-purple-600 transition-colors">About</Link>
+              <Link to="/pricing" className="hover:text-purple-600 transition-colors">Pricing</Link>
+              <Link to="/contact" className="hover:text-purple-600 transition-colors">Contact</Link>
             </div>
           </div>
         </nav>
@@ -60,15 +65,10 @@ const Index = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <img 
-            src="/lovable-uploads/b7a6d977-e43d-451e-8150-3eb9173e99e2.png"
-            alt="Incepta Logo"
-            className="w-32 h-32 mx-auto mb-8"
-          />
           <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6">
             Welcome to Incepta
           </h1>
-          <p className="text-xl md:text-2xl text-purple-200 max-w-3xl mx-auto">
+          <p className="text-xl md:text-2xl text-purple-600 max-w-3xl mx-auto">
             Unlocking Innovation Through Intelligent Search
           </p>
         </motion.div>
@@ -105,42 +105,42 @@ const Index = () => {
                             bg-white/90 backdrop-blur-sm shadow-2xl
                             focus:outline-none focus:ring-2 focus:ring-purple-400 
                             focus:ring-opacity-50 transition-all
-                            search-input"
+                            search-input mb-12"
                 />
-              </div>
-              <div className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center space-x-2">
-                <label className="cursor-pointer p-3 bg-purple-100 text-purple-700 rounded-xl
-                                hover:bg-purple-200 transition-colors duration-200">
-                  <input
-                    type="file"
-                    onChange={handleFileChange}
-                    className="hidden"
-                    accept="image/*"
-                  />
-                  <Image className="w-5 h-5" />
-                </label>
-                <label className="cursor-pointer p-3 bg-purple-100 text-purple-700 rounded-xl
-                                hover:bg-purple-200 transition-colors duration-200">
-                  <input
-                    type="file"
-                    onChange={handleFileChange}
-                    className="hidden"
-                    accept=".pdf,.doc,.docx,.txt"
-                  />
-                  <Upload className="w-5 h-5" />
-                </label>
-                <button
-                  type="submit"
-                  className="p-3 bg-purple-600 text-white rounded-xl
-                           hover:bg-purple-700 transition-colors duration-200
-                           focus:outline-none focus:ring-2 focus:ring-purple-400"
-                >
-                  <Search className="w-5 h-5" />
-                </button>
+                <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex items-center space-x-4">
+                  <label className="cursor-pointer p-3 bg-purple-100 text-purple-700 rounded-xl
+                                  hover:bg-purple-200 transition-colors duration-200">
+                    <input
+                      type="file"
+                      onChange={handleFileChange}
+                      className="hidden"
+                      accept="image/*"
+                    />
+                    <Image className="w-5 h-5" />
+                  </label>
+                  <label className="cursor-pointer p-3 bg-purple-100 text-purple-700 rounded-xl
+                                  hover:bg-purple-200 transition-colors duration-200">
+                    <input
+                      type="file"
+                      onChange={handleFileChange}
+                      className="hidden"
+                      accept=".pdf,.doc,.docx,.txt"
+                    />
+                    <Upload className="w-5 h-5" />
+                  </label>
+                  <button
+                    type="submit"
+                    className="p-3 bg-purple-600 text-white rounded-xl
+                             hover:bg-purple-700 transition-colors duration-200
+                             focus:outline-none focus:ring-2 focus:ring-purple-400"
+                  >
+                    <Search className="w-5 h-5" />
+                  </button>
+                </div>
               </div>
             </div>
             {(selectedFile || selectedImage) && (
-              <div className="mb-4 text-sm text-purple-200">
+              <div className="mb-4 text-sm text-purple-600">
                 {selectedFile && <div>Document: {selectedFile.name}</div>}
                 {selectedImage && <div>Image: {selectedImage.name}</div>}
               </div>
@@ -153,15 +153,15 @@ const Index = () => {
             transition={{ duration: 0.6, delay: 0.4 }}
             className="mt-8"
           >
-            <div className="text-purple-300 mb-4">Try searching for:</div>
+            <div className="text-purple-600 mb-4">Try searching for:</div>
             <div className="flex flex-wrap gap-3">
               {suggestions.map((suggestion, index) => (
                 <button
                   key={index}
                   onClick={() => setSearchQuery(suggestion)}
-                  className="px-4 py-2 bg-purple-700/50 text-purple-100 rounded-xl
-                           hover:bg-purple-600/50 transition-colors duration-200 text-sm
-                           backdrop-blur-sm border border-purple-600/30"
+                  className="px-4 py-2 bg-white/50 text-purple-700 rounded-xl
+                           hover:bg-white/70 transition-colors duration-200 text-sm
+                           backdrop-blur-sm border border-purple-300/30"
                 >
                   {suggestion}
                 </button>
