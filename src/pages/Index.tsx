@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { TypeAnimation } from "react-type-animation";
@@ -88,8 +89,8 @@ const Index = () => {
           className="max-w-4xl mx-auto"
         >
           <form onSubmit={handleSearch} className="relative">
-            <div className="relative group mb-4">
-              <div className="relative">
+            <div className="relative group">
+              <div className="relative bg-white/90 backdrop-blur-sm shadow-2xl rounded-2xl">
                 <TypeAnimation
                   sequence={[
                     "Ask Incepta to find AI patents in healthcare...",
@@ -104,57 +105,63 @@ const Index = () => {
                   wrapper="div"
                   speed={50}
                   repeat={Infinity}
-                  className="absolute left-8 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none text-xl"
+                  className="absolute left-8 top-8 text-gray-400 pointer-events-none text-xl"
                   style={{ 
                     display: searchQuery ? 'none' : 'block',
                     zIndex: 10
                   }}
                 />
-                <input
-                  type="text"
+                <textarea
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder=""
+                  rows={4}
                   className="w-full px-8 py-8 text-xl text-gray-800 border-0 rounded-2xl 
-                            bg-white/90 backdrop-blur-sm shadow-2xl
+                            bg-transparent resize-none
                             focus:outline-none focus:ring-2 focus:ring-purple-400 
                             focus:ring-opacity-50 transition-all
                             search-input"
                 />
-              </div>
-              <div className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center space-x-2">
-                <label className="cursor-pointer p-3 bg-purple-100 text-purple-700 rounded-xl
-                                hover:bg-purple-200 transition-colors duration-200">
-                  <input
-                    type="file"
-                    onChange={handleFileChange}
-                    className="hidden"
-                    accept="image/*"
-                  />
-                  <Image className="w-5 h-5" />
-                </label>
-                <label className="cursor-pointer p-3 bg-purple-100 text-purple-700 rounded-xl
-                                hover:bg-purple-200 transition-colors duration-200">
-                  <input
-                    type="file"
-                    onChange={handleFileChange}
-                    className="hidden"
-                    accept=".pdf,.doc,.docx,.txt"
-                  />
-                  <Upload className="w-5 h-5" />
-                </label>
-                <button
-                  type="submit"
-                  className="p-3 bg-purple-600 text-white rounded-xl
-                           hover:bg-purple-700 transition-colors duration-200
-                           focus:outline-none focus:ring-2 focus:ring-purple-400"
-                >
-                  <Search className="w-5 h-5" />
-                </button>
+                <div className="px-8 py-4 border-t border-gray-100 flex items-center justify-between">
+                  <div className="flex items-center space-x-4">
+                    <label className="flex items-center space-x-2 cursor-pointer text-purple-700 hover:text-purple-800 transition-colors">
+                      <div className="p-2 bg-purple-100 rounded-lg">
+                        <Image className="w-5 h-5" />
+                      </div>
+                      <span className="text-sm">Add image</span>
+                      <input
+                        type="file"
+                        onChange={handleFileChange}
+                        className="hidden"
+                        accept="image/*"
+                      />
+                    </label>
+                    <label className="flex items-center space-x-2 cursor-pointer text-purple-700 hover:text-purple-800 transition-colors">
+                      <div className="p-2 bg-purple-100 rounded-lg">
+                        <Upload className="w-5 h-5" />
+                      </div>
+                      <span className="text-sm">Upload file</span>
+                      <input
+                        type="file"
+                        onChange={handleFileChange}
+                        className="hidden"
+                        accept=".pdf,.doc,.docx,.txt"
+                      />
+                    </label>
+                  </div>
+                  <button
+                    type="submit"
+                    className="p-3 bg-purple-600 text-white rounded-xl
+                             hover:bg-purple-700 transition-colors duration-200
+                             focus:outline-none focus:ring-2 focus:ring-purple-400"
+                  >
+                    <Search className="w-5 h-5" />
+                  </button>
+                </div>
               </div>
             </div>
             {(selectedFile || selectedImage) && (
-              <div className="mb-4 text-sm text-purple-600">
+              <div className="mt-4 text-sm text-purple-600">
                 {selectedFile && <div>Document: {selectedFile.name}</div>}
                 {selectedImage && <div>Image: {selectedImage.name}</div>}
               </div>
