@@ -3,32 +3,26 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { TypeAnimation } from "react-type-animation";
 import { Link, useNavigate } from "react-router-dom";
-import { Upload, Search, Image } from "lucide-react";
+import { Upload, Search } from "lucide-react";
 
 const Index = () => {
   const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
-  const [selectedImage, setSelectedImage] = useState<File | null>(null);
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     navigate('/chat', { 
       state: { 
         query: searchQuery,
-        file: selectedFile,
-        image: selectedImage
+        file: selectedFile
       } 
     });
   };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
-      if (e.target.accept.includes('image')) {
-        setSelectedImage(e.target.files[0]);
-      } else {
-        setSelectedFile(e.target.files[0]);
-      }
+      setSelectedFile(e.target.files[0]);
     }
   };
 
@@ -75,7 +69,7 @@ const Index = () => {
             className="w-32 h-32 mx-auto mb-8"
           />
           <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6">
-            Welcome to Incepta
+            Idea to funding and technology in seconds
           </h1>
           <p className="text-xl md:text-2xl text-purple-600 max-w-3xl mx-auto">
             Unlocking Innovation Through Intelligent Search
@@ -126,18 +120,6 @@ const Index = () => {
                   <div className="flex items-center space-x-4">
                     <label className="flex items-center space-x-2 cursor-pointer text-purple-700 hover:text-purple-800 transition-colors">
                       <div className="p-2 bg-purple-100 rounded-lg">
-                        <Image className="w-5 h-5" />
-                      </div>
-                      <span className="text-sm">Add image</span>
-                      <input
-                        type="file"
-                        onChange={handleFileChange}
-                        className="hidden"
-                        accept="image/*"
-                      />
-                    </label>
-                    <label className="flex items-center space-x-2 cursor-pointer text-purple-700 hover:text-purple-800 transition-colors">
-                      <div className="p-2 bg-purple-100 rounded-lg">
                         <Upload className="w-5 h-5" />
                       </div>
                       <span className="text-sm">Upload file</span>
@@ -160,10 +142,9 @@ const Index = () => {
                 </div>
               </div>
             </div>
-            {(selectedFile || selectedImage) && (
+            {selectedFile && (
               <div className="mt-4 text-sm text-purple-600">
-                {selectedFile && <div>Document: {selectedFile.name}</div>}
-                {selectedImage && <div>Image: {selectedImage.name}</div>}
+                <div>Document: {selectedFile.name}</div>
               </div>
             )}
           </form>
