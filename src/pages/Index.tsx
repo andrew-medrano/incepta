@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { TypeAnimation } from "react-type-animation";
@@ -105,13 +104,17 @@ const Index = () => {
                   wrapper="div"
                   speed={50}
                   repeat={Infinity}
-                  className="absolute left-8 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none"
-                  style={{ display: searchQuery ? 'none' : 'block' }}
+                  className="absolute left-8 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none text-xl"
+                  style={{ 
+                    display: searchQuery ? 'none' : 'block',
+                    zIndex: 10
+                  }}
                 />
                 <input
                   type="text"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
+                  placeholder=""
                   className="w-full px-8 py-8 text-xl text-gray-800 border-0 rounded-2xl 
                             bg-white/90 backdrop-blur-sm shadow-2xl
                             focus:outline-none focus:ring-2 focus:ring-purple-400 
