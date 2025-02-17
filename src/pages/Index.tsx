@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { TypeAnimation } from "react-type-animation";
@@ -13,6 +14,8 @@ const Index = () => {
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
+    if (!searchQuery.trim()) return;
+    
     navigate('/chat', { 
       state: { 
         query: searchQuery,
@@ -166,9 +169,12 @@ const Index = () => {
                   </label>
                   <button
                     type="submit"
-                    className="p-2 bg-purple-600 text-white rounded-xl
-                             hover:bg-purple-700 transition-colors duration-200
-                             focus:outline-none focus:ring-2 focus:ring-purple-400"
+                    disabled={!searchQuery.trim()}
+                    className={`p-2 rounded-xl transition-colors duration-200
+                             focus:outline-none focus:ring-2 focus:ring-purple-400
+                             ${searchQuery.trim() 
+                               ? 'bg-purple-600 text-white hover:bg-purple-700' 
+                               : 'bg-purple-300 text-white cursor-not-allowed'}`}
                   >
                     <Search className="w-4 h-4" />
                   </button>
