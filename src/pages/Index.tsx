@@ -137,8 +137,20 @@ const Index = () => {
                             focus:ring-opacity-50 transition-all
                             search-input"
                 />
-                <div className="px-8 py-2 border-t border-gray-100 flex items-center justify-between">
-                  <div className="flex items-center space-x-4">
+                <div className="px-8 py-2 border-t border-gray-100 flex items-center">
+                  <label className="flex items-center space-x-2 cursor-pointer text-purple-700 hover:text-purple-800 transition-colors">
+                    <div className="p-2 bg-purple-100 rounded-lg">
+                      <Upload className="w-5 h-5" />
+                    </div>
+                    <span className="text-sm">Upload file</span>
+                    <input
+                      type="file"
+                      onChange={handleFileChange}
+                      className="hidden"
+                      accept=".pdf,.doc,.docx,.txt"
+                    />
+                  </label>
+                  <div className="flex-1 flex justify-center">
                     <ToggleGroup
                       type="single"
                       defaultValue="grants"
@@ -153,18 +165,6 @@ const Index = () => {
                         Technology
                       </ToggleGroupItem>
                     </ToggleGroup>
-                    <label className="flex items-center space-x-2 cursor-pointer text-purple-700 hover:text-purple-800 transition-colors">
-                      <div className="p-2 bg-purple-100 rounded-lg">
-                        <Upload className="w-5 h-5" />
-                      </div>
-                      <span className="text-sm">Upload file</span>
-                      <input
-                        type="file"
-                        onChange={handleFileChange}
-                        className="hidden"
-                        accept=".pdf,.doc,.docx,.txt"
-                      />
-                    </label>
                   </div>
                   <button
                     type="submit"
