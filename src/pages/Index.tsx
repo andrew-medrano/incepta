@@ -4,12 +4,14 @@ import { TypeAnimation } from "react-type-animation";
 import { Link, useNavigate } from "react-router-dom";
 import { Upload, Search } from "lucide-react";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
+import { useToast } from "@/components/ui/use-toast";
 
 const Index = () => {
   const navigate = useNavigate();
+  const { toast } = useToast();
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
-  const [mode, setMode] = useState<"grants" | "technology">("grants");
+  const [mode, setMode] = useState<"grants" | "technology">("technology");
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
@@ -22,6 +24,20 @@ const Index = () => {
         mode: mode
       } 
     });
+  };
+
+  const handleModeChange = (value: string | undefined) => {
+    if (value === "grants") {
+      toast({
+        title: "Coming Soon",
+        description: "Grants search is currently under development.",
+        duration: 3000,
+      });
+      return;
+    }
+    if (value) {
+      setMode(value as "grants" | "technology");
+    }
   };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -119,15 +135,21 @@ const Index = () => {
               <div className="flex justify-center mb-3">
                 <ToggleGroup
                   type="single"
-                  defaultValue="grants"
+                  defaultValue="technology"
                   value={mode}
-                  onValueChange={(value) => value && setMode(value as "grants" | "technology")}
+                  onValueChange={handleModeChange}
                   className="bg-white/50 backdrop-blur-sm p-0.5 rounded-lg border border-purple-200"
                 >
-                  <ToggleGroupItem value="grants" className="w-[100px] px-3 py-1.5 rounded-md data-[state=on]:bg-purple-600 data-[state=on]:text-white text-sm">
+                  <ToggleGroupItem 
+                    value="grants" 
+                    className="w-[100px] px-3 py-1.5 rounded-md data-[state=on]:bg-purple-600 data-[state=on]:text-white text-sm cursor-not-allowed opacity-50"
+                  >
                     Grants
                   </ToggleGroupItem>
-                  <ToggleGroupItem value="technology" className="w-[100px] px-3 py-1.5 rounded-md data-[state=on]:bg-purple-600 data-[state=on]:text-white text-sm">
+                  <ToggleGroupItem 
+                    value="technology" 
+                    className="w-[100px] px-3 py-1.5 rounded-md data-[state=on]:bg-purple-600 data-[state=on]:text-white text-sm"
+                  >
                     Technology
                   </ToggleGroupItem>
                 </ToggleGroup>
