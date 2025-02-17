@@ -114,6 +114,22 @@ const Index = () => {
         >
           <form onSubmit={handleSearch} className="relative">
             <div className="relative group">
+              <div className="flex justify-center mb-4">
+                <ToggleGroup
+                  type="single"
+                  defaultValue="grants"
+                  value={mode}
+                  onValueChange={(value) => value && setMode(value as "grants" | "technology")}
+                  className="bg-white/50 backdrop-blur-sm p-0.5 rounded-lg border border-purple-200"
+                >
+                  <ToggleGroupItem value="grants" className="w-[100px] px-4 py-1 rounded-md data-[state=on]:bg-purple-600 data-[state=on]:text-white text-sm">
+                    Grants
+                  </ToggleGroupItem>
+                  <ToggleGroupItem value="technology" className="w-[100px] px-4 py-1 rounded-md data-[state=on]:bg-purple-600 data-[state=on]:text-white text-sm">
+                    Technology
+                  </ToggleGroupItem>
+                </ToggleGroup>
+              </div>
               <div className="relative bg-white/90 backdrop-blur-sm shadow-2xl rounded-2xl">
                 <TypeAnimation
                   sequence={typewriterSequences[mode]}
@@ -137,7 +153,7 @@ const Index = () => {
                             focus:ring-opacity-50 transition-all
                             search-input"
                 />
-                <div className="px-8 py-1 border-t border-gray-100 flex items-center">
+                <div className="px-8 py-1 border-t border-gray-100 flex items-center justify-between">
                   <label className="flex items-center space-x-2 cursor-pointer text-purple-700 hover:text-purple-800 transition-colors">
                     <div className="p-1.5 bg-purple-100 rounded-lg">
                       <Upload className="w-4 h-4" />
@@ -150,22 +166,6 @@ const Index = () => {
                       accept=".pdf,.doc,.docx,.txt"
                     />
                   </label>
-                  <div className="flex-1 flex justify-center">
-                    <ToggleGroup
-                      type="single"
-                      defaultValue="grants"
-                      value={mode}
-                      onValueChange={(value) => value && setMode(value as "grants" | "technology")}
-                      className="bg-white/50 backdrop-blur-sm p-0.5 rounded-lg border border-purple-200"
-                    >
-                      <ToggleGroupItem value="grants" className="w-[100px] px-4 py-1 rounded-md data-[state=on]:bg-purple-600 data-[state=on]:text-white text-sm">
-                        Grants
-                      </ToggleGroupItem>
-                      <ToggleGroupItem value="technology" className="w-[100px] px-4 py-1 rounded-md data-[state=on]:bg-purple-600 data-[state=on]:text-white text-sm">
-                        Technology
-                      </ToggleGroupItem>
-                    </ToggleGroup>
-                  </div>
                   <button
                     type="submit"
                     className="p-2 bg-purple-600 text-white rounded-xl
