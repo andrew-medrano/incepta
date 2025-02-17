@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { TypeAnimation } from "react-type-animation";
@@ -170,13 +169,15 @@ const Index = () => {
                   <button
                     type="submit"
                     disabled={!searchQuery.trim()}
-                    className={`p-2 rounded-xl transition-colors duration-200
+                    className={`px-6 py-2 rounded-xl transition-colors duration-200
+                             flex items-center space-x-2
                              focus:outline-none focus:ring-2 focus:ring-purple-400
                              ${searchQuery.trim() 
                                ? 'bg-purple-600 text-white hover:bg-purple-700' 
                                : 'bg-purple-300 text-white cursor-not-allowed'}`}
                   >
                     <Search className="w-4 h-4" />
+                    <span className="text-sm font-medium">Search</span>
                   </button>
                 </div>
               </div>
