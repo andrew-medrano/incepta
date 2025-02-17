@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Send, ArrowLeft } from "lucide-react";
@@ -21,7 +20,6 @@ const ChatResults = () => {
     }
   }, [searchState, navigate]);
 
-  // If there's no search state, return null to prevent rendering while redirecting
   if (!searchState?.query) {
     return null;
   }
@@ -48,25 +46,23 @@ const ChatResults = () => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-purple-200 to-purple-100">
       <header className="bg-white/70 backdrop-blur-md border-b border-purple-200 sticky top-0 z-50">
-        <nav className="container mx-auto px-6 py-4">
+        <div className="px-6 py-4">
           <div className="flex items-center justify-between">
             <Link to="/" className="flex items-center space-x-3">
               <ArrowLeft className="w-5 h-5 text-purple-900" />
               <span className="text-purple-900">Back to Search</span>
             </Link>
           </div>
-        </nav>
+        </div>
       </header>
 
-      <div className="container mx-auto px-6 py-8 max-w-4xl">
-        {/* User Query Display */}
+      <div className="px-6 py-8 max-w-4xl mx-auto">
         <div className="text-center mb-8">
           <div className="inline-block bg-white/90 backdrop-blur-sm px-8 py-4 rounded-2xl shadow-sm">
             <p className="text-lg text-purple-900 font-medium">{searchState.query}</p>
           </div>
         </div>
 
-        {/* Chat Results Area */}
         <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl p-6 min-h-[600px] flex flex-col">
           <ScrollArea className="flex-1 mb-6">
             <div className="space-y-6">

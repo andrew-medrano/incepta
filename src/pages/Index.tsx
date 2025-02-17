@@ -72,7 +72,7 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-purple-200 to-purple-100 text-purple-900">
       <header className="bg-white/70 backdrop-blur-md border-b border-purple-200 sticky top-0 z-50">
-        <nav className="container mx-auto px-6 py-4">
+        <div className="px-6 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
               <img src="/lovable-uploads/b7a6d977-e43d-451e-8150-3eb9173e99e2.png" alt="Incepta Logo" className="w-8 h-8" />
@@ -85,10 +85,10 @@ const Index = () => {
               <Link to="/contact" className="hover:text-purple-600 transition-colors">Contact</Link>
             </div>
           </div>
-        </nav>
+        </div>
       </header>
 
-      <div className="container mx-auto px-6 py-24 max-w-7xl">
+      <div className="px-6 py-24">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
