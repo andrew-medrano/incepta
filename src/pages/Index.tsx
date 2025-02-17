@@ -1,43 +1,19 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { TypeAnimation } from "react-type-animation";
 import { Link, useNavigate } from "react-router-dom";
-import { Upload, Search, Clock } from "lucide-react";
+import { Upload, Search } from "lucide-react";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
-
-interface PreviousQuery {
-  query: string;
-  timestamp: number;
-  mode: "grants" | "technology";
-}
 
 const Index = () => {
   const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [mode, setMode] = useState<"grants" | "technology">("grants");
-  const [previousQueries, setPreviousQueries] = useState<PreviousQuery[]>([]);
-
-  useEffect(() => {
-    const stored = localStorage.getItem('previousQueries');
-    if (stored) {
-      setPreviousQueries(JSON.parse(stored));
-    }
-  }, []);
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     if (!searchQuery.trim()) return;
-    
-    const newQuery = {
-      query: searchQuery.trim(),
-      timestamp: Date.now(),
-      mode
-    };
-
-    const updatedQueries = [newQuery, ...previousQueries].slice(0, 8);
-    localStorage.setItem('previousQueries', JSON.stringify(updatedQueries));
-    setPreviousQueries(updatedQueries);
     
     navigate('/chat', { 
       state: { 
@@ -91,18 +67,6 @@ const Index = () => {
       "Ask Incepta to analyze emerging technologies...",
       2000
     ]
-  };
-
-  const formatTimeAgo = (timestamp: number) => {
-    const seconds = Math.floor((Date.now() - timestamp) / 1000);
-    
-    if (seconds < 60) return 'less than a minute ago';
-    const minutes = Math.floor(seconds / 60);
-    if (minutes < 60) return `${minutes} minute${minutes > 1 ? 's' : ''} ago`;
-    const hours = Math.floor(minutes / 60);
-    if (hours < 24) return `${hours} hour${hours > 1 ? 's' : ''} ago`;
-    const days = Math.floor(hours / 24);
-    return `${days} day${days > 1 ? 's' : ''} ago`;
   };
 
   return (
@@ -246,50 +210,6 @@ const Index = () => {
               ))}
             </div>
           </motion.div>
-
-          {previousQueries.length > 0 && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.6, delay: 0.6 }}
-              className="mt-16"
-            >
-              <div className="flex items-center space-x-2 text-purple-600 mb-6">
-                <Clock className="w-4 h-4" />
-                <span>Previous searches</span>
-              </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                {previousQueries.map((query, index) => (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.3, delay: index * 0.1 }}
-                    className="bg-white/90 backdrop-blur-sm rounded-xl p-4 shadow-sm 
-                             hover:shadow-md transition-shadow cursor-pointer"
-                    onClick={() => {
-                      setSearchQuery(query.query);
-                      setMode(query.mode);
-                    }}
-                  >
-                    <div className="flex items-start justify-between">
-                      <div className="flex-1">
-                        <p className="text-purple-900 font-medium truncate">{query.query}</p>
-                        <p className="text-sm text-purple-500 mt-1">{formatTimeAgo(query.timestamp)}</p>
-                      </div>
-                      <span className={`text-xs px-2 py-1 rounded-full ${
-                        query.mode === 'grants' 
-                          ? 'bg-purple-100 text-purple-600' 
-                          : 'bg-blue-100 text-blue-600'
-                      }`}>
-                        {query.mode}
-                      </span>
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
-            </motion.div>
-          )}
         </motion.div>
       </div>
     </div>
