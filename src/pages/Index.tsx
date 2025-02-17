@@ -151,7 +151,7 @@ const Index = () => {
                             focus:ring-opacity-50 transition-all
                             search-input"
                 />
-                <div className="px-8 py-1 border-t border-gray-100 flex items-center justify-between">
+                <div className="px-8 py-1 flex items-center justify-between">
                   <label className="flex items-center space-x-2 cursor-pointer text-purple-700 hover:text-purple-800 transition-colors">
                     <div className="p-1.5 bg-purple-100 rounded-lg">
                       <Upload className="w-4 h-4" />
