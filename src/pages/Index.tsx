@@ -141,16 +141,16 @@ const Index = () => {
                   className="bg-white/50 backdrop-blur-sm p-0.5 rounded-lg border border-purple-200"
                 >
                   <ToggleGroupItem 
-                    value="grants" 
-                    className="w-[100px] px-3 py-1.5 rounded-md data-[state=on]:bg-purple-600 data-[state=on]:text-white text-sm cursor-not-allowed opacity-50"
-                  >
-                    Grants
-                  </ToggleGroupItem>
-                  <ToggleGroupItem 
                     value="technology" 
                     className="w-[100px] px-3 py-1.5 rounded-md data-[state=on]:bg-purple-600 data-[state=on]:text-white text-sm"
                   >
                     Technology
+                  </ToggleGroupItem>
+                  <ToggleGroupItem 
+                    value="grants" 
+                    className="w-[100px] px-3 py-1.5 rounded-md data-[state=on]:bg-purple-600 data-[state=on]:text-white text-sm cursor-not-allowed opacity-50"
+                  >
+                    Grants
                   </ToggleGroupItem>
                 </ToggleGroup>
               </div>
