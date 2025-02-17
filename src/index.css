@@ -56,3 +56,11 @@
   animation: fadeIn 0.8s ease-out forwards;
 }
 
+textarea:focus {
+  outline: none !important;
+}
+
+textarea:focus-visible {
+  outline: none !important;
+}
+
