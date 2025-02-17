@@ -131,17 +131,15 @@ const Index = () => {
                 </ToggleGroup>
               </div>
               <div className="relative bg-white/90 backdrop-blur-sm shadow-2xl rounded-2xl">
-                <TypeAnimation
-                  sequence={typewriterSequences[mode]}
-                  wrapper="div"
-                  speed={50}
-                  repeat={Infinity}
-                  className="absolute left-8 top-8 text-gray-400 pointer-events-none text-xl"
-                  style={{ 
-                    display: searchQuery ? 'none' : 'block',
-                    zIndex: 10
-                  }}
-                />
+                {searchQuery.length === 0 && (
+                  <TypeAnimation
+                    sequence={typewriterSequences[mode]}
+                    wrapper="div"
+                    speed={50}
+                    repeat={Infinity}
+                    className="absolute left-8 top-8 text-gray-400 pointer-events-none text-xl"
+                  />
+                )}
                 <textarea
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
