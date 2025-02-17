@@ -137,10 +137,10 @@ const Index = () => {
                             focus:ring-opacity-50 transition-all
                             search-input"
                 />
-                <div className="px-8 py-2 border-t border-gray-100 flex items-center">
+                <div className="px-8 py-1 border-t border-gray-100 flex items-center">
                   <label className="flex items-center space-x-2 cursor-pointer text-purple-700 hover:text-purple-800 transition-colors">
-                    <div className="p-2 bg-purple-100 rounded-lg">
-                      <Upload className="w-5 h-5" />
+                    <div className="p-1.5 bg-purple-100 rounded-lg">
+                      <Upload className="w-4 h-4" />
                     </div>
                     <span className="text-sm">Upload file</span>
                     <input
@@ -156,23 +156,23 @@ const Index = () => {
                       defaultValue="grants"
                       value={mode}
                       onValueChange={(value) => value && setMode(value as "grants" | "technology")}
-                      className="bg-white/50 backdrop-blur-sm p-1 rounded-lg border border-purple-200"
+                      className="bg-white/50 backdrop-blur-sm p-0.5 rounded-lg border border-purple-200"
                     >
-                      <ToggleGroupItem value="grants" className="w-[100px] px-4 py-1.5 rounded-md data-[state=on]:bg-purple-600 data-[state=on]:text-white text-sm">
+                      <ToggleGroupItem value="grants" className="w-[100px] px-4 py-1 rounded-md data-[state=on]:bg-purple-600 data-[state=on]:text-white text-sm">
                         Grants
                       </ToggleGroupItem>
-                      <ToggleGroupItem value="technology" className="w-[100px] px-4 py-1.5 rounded-md data-[state=on]:bg-purple-600 data-[state=on]:text-white text-sm">
+                      <ToggleGroupItem value="technology" className="w-[100px] px-4 py-1 rounded-md data-[state=on]:bg-purple-600 data-[state=on]:text-white text-sm">
                         Technology
                       </ToggleGroupItem>
                     </ToggleGroup>
                   </div>
                   <button
                     type="submit"
-                    className="p-3 bg-purple-600 text-white rounded-xl
+                    className="p-2 bg-purple-600 text-white rounded-xl
                              hover:bg-purple-700 transition-colors duration-200
                              focus:outline-none focus:ring-2 focus:ring-purple-400"
                   >
-                    <Search className="w-5 h-5" />
+                    <Search className="w-4 h-4" />
                   </button>
                 </div>
               </div>
