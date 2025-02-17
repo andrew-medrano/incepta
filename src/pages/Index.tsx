@@ -72,13 +72,13 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-purple-200 to-purple-100 text-purple-900">
       <header className="bg-white/70 backdrop-blur-md border-b border-purple-200 sticky top-0 z-50">
-        <div className="px-6 py-3">
+        <div className="px-5 py-2">
           <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-3">
-              <img src="/lovable-uploads/b7a6d977-e43d-451e-8150-3eb9173e99e2.png" alt="Incepta Logo" className="w-8 h-8 logo-glow" />
-              <span className="text-xl font-semibold">Incepta</span>
+            <div className="flex items-center space-x-2">
+              <img src="/lovable-uploads/b7a6d977-e43d-451e-8150-3eb9173e99e2.png" alt="Incepta Logo" className="w-6 h-6 logo-glow" />
+              <span className="text-lg font-semibold">Incepta</span>
             </div>
-            <div className="flex items-center space-x-8">
+            <div className="flex items-center space-x-6">
               <Link to="/" className="hover:text-purple-600 transition-colors">Home</Link>
               <Link to="/about" className="hover:text-purple-600 transition-colors">About</Link>
               <Link to="/pricing" className="hover:text-purple-600 transition-colors">Pricing</Link>
@@ -88,22 +88,22 @@ const Index = () => {
         </div>
       </header>
 
-      <div className="px-6 py-16">
+      <div className="px-5 py-12">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-12"
+          className="text-center mb-10"
         >
           <img 
             src="/lovable-uploads/b7a6d977-e43d-451e-8150-3eb9173e99e2.png"
             alt="Incepta Logo"
-            className="w-32 h-32 mx-auto mb-6 logo-glow"
+            className="w-24 h-24 mx-auto mb-5 logo-glow"
           />
-          <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-4">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-3">
             Idea to funding and technology in seconds
           </h1>
-          <p className="text-xl md:text-2xl text-purple-600 max-w-3xl mx-auto">
+          <p className="text-lg md:text-xl text-purple-600 max-w-2xl mx-auto">
             Unlocking Innovation Through Intelligent Search
           </p>
         </motion.div>
@@ -112,11 +112,11 @@ const Index = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="max-w-4xl mx-auto"
+          className="max-w-3xl mx-auto"
         >
           <form onSubmit={handleSearch} className="relative">
             <div className="relative group">
-              <div className="flex justify-center mb-4">
+              <div className="flex justify-center mb-3">
                 <ToggleGroup
                   type="single"
                   defaultValue="grants"
@@ -124,10 +124,10 @@ const Index = () => {
                   onValueChange={(value) => value && setMode(value as "grants" | "technology")}
                   className="bg-white/50 backdrop-blur-sm p-0.5 rounded-lg border border-purple-200"
                 >
-                  <ToggleGroupItem value="grants" className="w-[100px] px-4 py-1 rounded-md data-[state=on]:bg-purple-600 data-[state=on]:text-white text-sm">
+                  <ToggleGroupItem value="grants" className="w-[80px] px-3 py-1 rounded-md data-[state=on]:bg-purple-600 data-[state=on]:text-white text-xs">
                     Grants
                   </ToggleGroupItem>
-                  <ToggleGroupItem value="technology" className="w-[100px] px-4 py-1 rounded-md data-[state=on]:bg-purple-600 data-[state=on]:text-white text-sm">
+                  <ToggleGroupItem value="technology" className="w-[80px] px-3 py-1 rounded-md data-[state=on]:bg-purple-600 data-[state=on]:text-white text-xs">
                     Technology
                   </ToggleGroupItem>
                 </ToggleGroup>
@@ -193,16 +193,16 @@ const Index = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.4 }}
-            className="mt-8"
+            className="mt-6"
           >
-            <div className="text-purple-600 mb-4">Try searching for:</div>
-            <div className="flex flex-wrap gap-3">
+            <div className="text-purple-600 mb-3">Try searching for:</div>
+            <div className="flex flex-wrap gap-2">
               {suggestions.map((suggestion, index) => (
                 <button
                   key={index}
                   onClick={() => setSearchQuery(suggestion)}
-                  className="px-4 py-2 bg-white/50 text-purple-700 rounded-xl
-                           hover:bg-white/70 transition-colors duration-200 text-sm
+                  className="px-3 py-1.5 bg-white/50 text-purple-700 rounded-lg
+                           hover:bg-white/70 transition-colors duration-200 text-xs
                            backdrop-blur-sm border border-purple-300/30"
                 >
                   {suggestion}
