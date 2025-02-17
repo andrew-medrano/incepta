@@ -75,7 +75,7 @@ const Index = () => {
         <div className="px-6 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
-              <img src="/lovable-uploads/b7a6d977-e43d-451e-8150-3eb9173e99e2.png" alt="Incepta Logo" className="w-8 h-8" />
+              <img src="/lovable-uploads/b7a6d977-e43d-451e-8150-3eb9173e99e2.png" alt="Incepta Logo" className="w-8 h-8 logo-glow" />
               <span className="text-xl font-semibold">Incepta</span>
             </div>
             <div className="flex items-center space-x-8">
@@ -98,7 +98,7 @@ const Index = () => {
           <img 
             src="/lovable-uploads/b7a6d977-e43d-451e-8150-3eb9173e99e2.png"
             alt="Incepta Logo"
-            className="w-32 h-32 mx-auto mb-8"
+            className="w-32 h-32 mx-auto mb-8 logo-glow"
           />
           <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6">
             Idea to funding and technology in seconds
