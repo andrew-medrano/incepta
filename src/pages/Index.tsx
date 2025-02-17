@@ -124,10 +124,10 @@ const Index = () => {
                   onValueChange={(value) => value && setMode(value as "grants" | "technology")}
                   className="bg-white/50 backdrop-blur-sm p-0.5 rounded-lg border border-purple-200"
                 >
-                  <ToggleGroupItem value="grants" className="w-[80px] px-3 py-1 rounded-md data-[state=on]:bg-purple-600 data-[state=on]:text-white text-xs">
+                  <ToggleGroupItem value="grants" className="w-[100px] px-3 py-1.5 rounded-md data-[state=on]:bg-purple-600 data-[state=on]:text-white text-sm">
                     Grants
                   </ToggleGroupItem>
-                  <ToggleGroupItem value="technology" className="w-[80px] px-3 py-1 rounded-md data-[state=on]:bg-purple-600 data-[state=on]:text-white text-xs">
+                  <ToggleGroupItem value="technology" className="w-[100px] px-3 py-1.5 rounded-md data-[state=on]:bg-purple-600 data-[state=on]:text-white text-sm">
                     Technology
                   </ToggleGroupItem>
                 </ToggleGroup>
