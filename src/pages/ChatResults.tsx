@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Send, ArrowLeft } from "lucide-react";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 interface SearchState {
   query: string;
@@ -45,23 +46,33 @@ const ChatResults = () => {
       </header>
 
       <div className="container mx-auto px-6 py-8 max-w-4xl">
-        <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl p-6 min-h-[600px] flex flex-col">
-          <div className="flex-1 space-y-6 overflow-auto mb-6">
-            {messages.map((message, index) => (
-              <div
-                key={index}
-                className={`p-4 rounded-xl max-w-[80%] ${
-                  message.type === 'user' 
-                    ? 'bg-purple-600 text-white ml-auto' 
-                    : message.type === 'system'
-                    ? 'bg-gray-200 text-gray-700'
-                    : 'bg-purple-100 text-purple-900'
-                }`}
-              >
-                {message.content}
-              </div>
-            ))}
+        {/* User Query Display */}
+        <div className="text-center mb-8">
+          <div className="inline-block bg-white/90 backdrop-blur-sm px-8 py-4 rounded-2xl shadow-sm">
+            <p className="text-lg text-purple-900 font-medium">{searchState.query}</p>
           </div>
+        </div>
+
+        {/* Chat Results Area */}
+        <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl p-6 min-h-[600px] flex flex-col">
+          <ScrollArea className="flex-1 mb-6">
+            <div className="space-y-6">
+              {messages.map((message, index) => (
+                <div
+                  key={index}
+                  className={`p-4 rounded-xl max-w-[80%] ${
+                    message.type === 'user' 
+                      ? 'bg-purple-600 text-white ml-auto' 
+                      : message.type === 'system'
+                      ? 'bg-gray-200 text-gray-700'
+                      : 'bg-purple-100 text-purple-900'
+                  }`}
+                >
+                  {message.content}
+                </div>
+              ))}
+            </div>
+          </ScrollArea>
 
           <form onSubmit={handleRefinement} className="relative">
             <input
