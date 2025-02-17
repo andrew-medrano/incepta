@@ -139,7 +139,7 @@ const Index = () => {
                     wrapper="div"
                     speed={50}
                     repeat={Infinity}
-                    className="absolute left-4 top-[1.125rem] text-gray-400 pointer-events-none text-xl"
+                    className="absolute left-4 top-4 text-gray-400 pointer-events-none text-xl"
                   />
                 )}
                 <textarea
