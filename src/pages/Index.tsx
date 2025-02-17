@@ -147,8 +147,8 @@ const Index = () => {
                   rows={4}
                   className="w-full px-8 py-8 text-xl text-gray-800 border-0 rounded-2xl 
                             bg-transparent resize-none
-                            focus:outline-none focus:ring-2 focus:ring-purple-400 
-                            focus:ring-opacity-50 transition-all
+                            focus:outline-none focus:ring-0
+                            transition-all
                             search-input"
                 />
                 <div className="px-8 py-1 flex items-center justify-between">
