@@ -72,7 +72,7 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-purple-200 to-purple-100 text-purple-900">
       <header className="bg-white/70 backdrop-blur-md border-b border-purple-200 sticky top-0 z-50">
-        <div className="px-6 py-4">
+        <div className="px-6 py-3">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
               <img src="/lovable-uploads/b7a6d977-e43d-451e-8150-3eb9173e99e2.png" alt="Incepta Logo" className="w-8 h-8 logo-glow" />
@@ -88,19 +88,19 @@ const Index = () => {
         </div>
       </header>
 
-      <div className="px-6 py-24">
+      <div className="px-6 py-16">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-12"
         >
           <img 
             src="/lovable-uploads/b7a6d977-e43d-451e-8150-3eb9173e99e2.png"
             alt="Incepta Logo"
-            className="w-32 h-32 mx-auto mb-8 logo-glow"
+            className="w-32 h-32 mx-auto mb-6 logo-glow"
           />
-          <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6">
+          <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-4">
             Idea to funding and technology in seconds
           </h1>
           <p className="text-xl md:text-2xl text-purple-600 max-w-3xl mx-auto">
