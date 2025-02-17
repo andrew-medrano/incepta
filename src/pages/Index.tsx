@@ -139,15 +139,15 @@ const Index = () => {
                     wrapper="div"
                     speed={50}
                     repeat={Infinity}
-                    className="absolute left-8 top-8 text-gray-400 pointer-events-none text-xl"
+                    className="absolute left-8 top-4 text-gray-400 pointer-events-none text-xl"
                   />
                 )}
                 <textarea
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder=""
-                  rows={4}
-                  className="w-full px-8 py-8 text-xl text-gray-800 border-0 rounded-2xl 
+                  rows={3}
+                  className="w-full px-8 py-4 text-xl text-gray-800 border-0 rounded-2xl 
                             bg-transparent resize-none
                             focus:outline-none focus:ring-0
                             transition-all
