@@ -1,6 +1,6 @@
 
-import { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Send, ArrowLeft } from "lucide-react";
 import { ScrollArea } from "@/components/ui/scroll-area";
 
@@ -12,7 +12,20 @@ interface SearchState {
 
 const ChatResults = () => {
   const location = useLocation();
-  const searchState = location.state as SearchState;
+  const navigate = useNavigate();
+  const searchState = location.state as SearchState | null;
+
+  useEffect(() => {
+    if (!searchState?.query) {
+      navigate('/');
+    }
+  }, [searchState, navigate]);
+
+  // If there's no search state, return null to prevent rendering while redirecting
+  if (!searchState?.query) {
+    return null;
+  }
+
   const [messages, setMessages] = useState([
     { type: 'system', content: `Here are the results for "${searchState.query}"` },
     { type: 'result', content: 'I found several relevant patents and research papers related to your query.' }
