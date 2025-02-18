@@ -28,8 +28,8 @@ File Map
 incepta
 ├── .dist            # (Build output or distribution directory, if used)
 ├── public
-│   ├── lovable-uploads
-│   │   └── b7a6d977-e43d-451e-8150-3eb9173e99e2.png
+│   ├── images
+│   │   └── logo.png
 │   ├── favicon.ico
 │   ├── og-image.png
 │   └── placeholder.svg

@@ -8,7 +8,7 @@ const About = () => {
         <div className="px-5 py-4">
           <div className="flex items-center justify-between">
             <Link to="/" className="flex items-center space-x-3">
-              <img src="/lovable-uploads/b7a6d977-e43d-451e-8150-3eb9173e99e2.png" alt="Incepta Logo" className="w-7 h-7 logo-glow" />
+              <img src="/images/logo.png" alt="Incepta Logo" className="w-7 h-7 logo-glow" />
               <span className="text-xl font-semibold">Incepta</span>
             </Link>
             <div className="flex items-center space-x-8">
@@ -28,7 +28,7 @@ const About = () => {
           className="text-center mb-16"
         >
           <img
-            src="/lovable-uploads/b7a6d977-e43d-451e-8150-3eb9173e99e2.png"
+            src="/images/logo.png"
             alt="Incepta Logo"
             className="w-24 h-24 mx-auto mb-5 logo-glow"
           />

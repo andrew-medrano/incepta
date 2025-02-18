@@ -1,69 +1,97 @@
-# Welcome to your Lovable project
+# Incepta Search
 
-## Project info
+A modern web application for technology transfer and patent search, built with Vite, React, TypeScript, and Tailwind CSS.
 
-**URL**: https://lovable.dev/projects/6d1aba6b-5fb3-49f3-b29d-8af5e5f8638d
+## Features
 
-## How can I edit this code?
+- 🔍 Intelligent search across 200+ US universities and research institutions
+- 🤖 AI-powered query analysis and refinement
+- 📊 Interactive knowledge graph visualization
+- 📱 Responsive design for all devices
+- 📄 PDF report generation
+- ⚡ Real-time search results
+- 🎨 Modern UI with Tailwind CSS and shadcn/ui
 
-There are several ways of editing your application.
+## Tech Stack
 
-**Use Lovable**
+- **Frontend Framework**: React with TypeScript
+- **Build Tool**: Vite
+- **Styling**: Tailwind CSS
+- **UI Components**: shadcn/ui
+- **Routing**: React Router
+- **Data Fetching**: TanStack React Query
+- **Notifications**: Sonner + shadcn/ui toasts
+- **Graph Visualization**: react-force-graph-2d
+- **PDF Generation**: html2pdf.js
+- **Markdown Rendering**: ReactMarkdown
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/6d1aba6b-5fb3-49f3-b29d-8af5e5f8638d) and start prompting.
+## Getting Started
 
-Changes made via Lovable will be committed automatically to this repo.
+1. Clone the repository:
+```bash
+git clone https://github.com/yourusername/incepta-harmony-search.git
+cd incepta-harmony-search
+```
 
-**Use your preferred IDE**
+2. Install dependencies:
+```bash
+npm install
+```
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
+3. Start the development server:
+```bash
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+4. Build for production:
+```bash
+npm run build
+```
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+5. Preview production build:
+```bash
+npm run preview
+```
 
-**Use GitHub Codespaces**
+## Project Structure
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+```
+src/
+├── components/     # React components
+│   ├── ui/        # shadcn/ui components
+│   └── ...        # Custom components
+├── hooks/         # Custom React hooks
+├── lib/          # Utility functions
+├── pages/        # Page components
+└── types/        # TypeScript types
+```
 
-## What technologies are used for this project?
+## Environment Variables
 
-This project is built with .
+Create a `.env` file in the root directory with the following variables:
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+```env
+VITE_API_URL=your_api_url
+OPENAI_API_KEY=your_openai_api_key
+PINECONE_API_KEY=your_pinecone_api_key
+PINECONE_HOSTNAME=your_pinecone_hostname
+```
 
-## How can I deploy this project?
+## Contributing
 
-Simply open [Lovable](https://lovable.dev/projects/6d1aba6b-5fb3-49f3-b29d-8af5e5f8638d) and click on Share -> Publish.
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
-## I want to use a custom domain - is that possible?
+## License
 
-We don't support custom domains (yet). If you want to deploy your project under your own domain then we recommend using Netlify. Visit our docs for more details: [Custom domains](https://docs.lovable.dev/tips-tricks/custom-domain/)
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Acknowledgments
+
+- [shadcn/ui](https://ui.shadcn.com/) for the beautiful UI components
+- [Tailwind CSS](https://tailwindcss.com/) for the utility-first CSS framework
+- [Vite](https://vitejs.dev/) for the blazing fast build tool
+- [React](https://reactjs.org/) for the awesome frontend library
