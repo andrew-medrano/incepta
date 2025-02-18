@@ -1,0 +1,238 @@
+cursorrules
+
+This repository is a Vite + React + TypeScript project that also leverages Tailwind CSS, shadcn-ui components, React Router, and other libraries for building modern front-end applications. The project name is incepta-harmony-search.
+
+Table of Contents
+	1.	Overview of the Stack
+	2.	File Map
+	3.	Folder-by-Folder Guide
+	4.	How Things Link Together
+	5.	Adding a New UI Component
+	•	Example: Creating a Button Variant
+	6.	Adding a New Page
+	7.	Scripts and Commands
+	8.	Additional Tips
+
+Overview of the Stack
+	•	Vite: A fast development build tool that replaces heavy bundlers like Webpack.
+	•	TypeScript: Strongly typed JavaScript, which helps catch errors early and makes refactoring easier.
+	•	React: UI library for building reusable user interface components.
+	•	React Router (react-router-dom): For handling routing in a Single Page Application (SPA).
+	•	Tailwind CSS: Utility-first CSS framework for rapid UI development.
+	•	shadcn-ui: A set of prebuilt and composable components for React + Tailwind.
+	•	TanStack React Query: For data fetching, caching, and managing asynchronous state.
+	•	Sonner + shadcn-ui toasts: For user notifications/toasts.
+
+File Map
+
+incepta
+├── .dist            # (Build output or distribution directory, if used)
+├── public
+│   ├── lovable-uploads
+│   │   └── b7a6d977-e43d-451e-8150-3eb9173e99e2.png
+│   ├── favicon.ico
+│   ├── og-image.png
+│   └── placeholder.svg
+├── src
+│   ├── components
+│   │   ├── ui
+│   │   │   ├── accordion.tsx
+│   │   │   ├── alert-dialog.tsx
+│   │   │   ├── alert.tsx
+│   │   │   ├── aspect-ratio.tsx
+│   │   │   ├── avatar.tsx
+│   │   │   ├── badge.tsx
+│   │   │   ├── breadcrumb.tsx
+│   │   │   ├── button.tsx
+│   │   │   ├── calendar.tsx
+│   │   │   ├── card.tsx
+│   │   │   ├── carousel.tsx
+│   │   │   ├── chart.tsx
+│   │   │   ├── checkbox.tsx
+│   │   │   ├── collapsible.tsx
+│   │   │   ├── command.tsx
+│   │   │   ├── context-menu.tsx
+│   │   │   ├── dialog.tsx
+│   │   │   ├── drawer.tsx
+│   │   │   ├── dropdown-menu.tsx
+│   │   │   ├── form.tsx
+│   │   │   ├── hover-card.tsx
+│   │   │   ├── input-otp.tsx
+│   │   │   ├── input.tsx
+│   │   │   ├── label.tsx
+│   │   │   ├── menubar.tsx
+│   │   │   ├── navigation-menu.tsx
+│   │   │   ├── pagination.tsx
+│   │   │   ├── popover.tsx
+│   │   │   ├── progress.tsx
+│   │   │   ├── radio-group.tsx
+│   │   │   ├── resizable.tsx
+│   │   │   ├── scroll-area.tsx
+│   │   │   ├── select.tsx
+│   │   │   ├── separator.tsx
+│   │   │   ├── sheet.tsx
+│   │   │   ├── sidebar.tsx
+│   │   │   ├── skeleton.tsx
+│   │   │   ├── slider.tsx
+│   │   │   ├── sonner.tsx
+│   │   │   ├── switch.tsx
+│   │   │   ├── table.tsx
+│   │   │   ├── tabs.tsx
+│   │   │   ├── textarea.tsx
+│   │   │   ├── toast.tsx
+│   │   │   ├── toaster.tsx
+│   │   │   ├── toggle-group.tsx
+│   │   │   ├── toggle.tsx
+│   │   │   ├── tooltip.tsx
+│   │   │   └── use-toast.ts
+│   ├── hooks
+│   │   ├── use-mobile.tsx
+│   │   └── use-toast.ts
+│   ├── lib
+│   │   └── utils.ts
+│   ├── pages
+│   │   ├── ChatResults.tsx
+│   │   ├── Index.tsx
+│   │   └── NotFound.tsx
+│   ├── App.css
+│   ├── App.tsx
+│   ├── index.css
+│   ├── main.tsx
+│   └── vite-env.d.ts
+├── bun.lockb
+├── components.json
+├── eslint.config.js
+├── index.html
+├── package.json
+├── postcss.config.js
+├── README.md
+├── tailwind.config.ts
+├── tsconfig.app.json
+├── tsconfig.json
+├── tsconfig.node.json
+└── vite.config.ts
+
+Folder-by-Folder Guide
+	1.	public/
+	•	Contains static files that Vite will serve directly.
+	•	You can place images, icons, or other assets here.
+	2.	src/components/
+	•	Houses React components.
+	•	Typically, you might group components by domain or usage.
+	•	The ui/ folder includes shadcn-ui-based components (e.g., Buttons, Dialogs, Toasts).
+	3.	src/hooks/
+	•	Custom React hooks live here.
+	•	For example, use-mobile.tsx to detect if the user is on a mobile device.
+	4.	src/lib/
+	•	Utility functions or shared logic that doesn’t fit neatly into hooks or components.
+	•	Example: utils.ts with cn() function for Tailwind class merging.
+	5.	src/pages/
+	•	Each file in pages represents a “view” or “page” in your app.
+	•	Routing for these pages is defined in App.tsx using react-router-dom.
+	6.	src/index.css
+	•	Tailwind’s base configuration and custom CSS rules.
+	•	Also contains global animations or custom classes.
+	7.	src/App.tsx
+	•	The root-level React component.
+	•	Incorporates your router, query clients, and UI providers (Toasts, Tooltip, etc.).
+	8.	src/main.tsx
+	•	The entry point for Vite.
+	•	Mounts the React application onto the #root element in index.html.
+	9.	index.html
+	•	Main HTML template served by Vite.
+
+How Things Link Together
+	•	Routing: Managed by react-router-dom. The <BrowserRouter> in App.tsx defines how we switch between pages like / (Index), /chat (ChatResults), * (NotFound).
+	•	UI Components: We use shadcn-ui components found under src/components/ui/. When you need a Button, Dialog, or Toast, import from this folder.
+	•	Custom Hooks: If you have repeated logic (like media queries or toast state), place them in the src/hooks folder. Examples include:
+	•	use-mobile.tsx — A hook to track mobile viewport usage.
+	•	use-toast.ts — A custom toast manager that wraps the shadcn-ui toasts.
+	•	State Management: Some global or asynchronous state is managed via React Query (see QueryClient in App.tsx) and useToast for ephemeral messages.
+
+Adding a New UI Component
+
+To create a new UI component using Tailwind and the shadcn-ui style approach:
+	1.	Go to src/components/ui/.
+	2.	Create a new file, e.g. fancy-alert.tsx.
+	3.	Import React and the utility function cn from src/lib/utils.
+	4.	Write your component logic, and export it.
+
+Example: Creating a Button Variant
+
+File: src/components/ui/button-variant.tsx
+
+import * as React from "react"
+import { cn } from "@/lib/utils"
+
+interface ButtonVariantProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  variant?: "primary" | "secondary"
+}
+
+export function ButtonVariant({ variant = "primary", className, ...props }: ButtonVariantProps) {
+  const baseStyles =
+    "inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus:outline-none"
+
+  const variants = {
+    primary: "bg-purple-600 text-white hover:bg-purple-700",
+    secondary: "bg-gray-200 text-gray-700 hover:bg-gray-300",
+  }
+
+  return (
+    <button
+      className={cn(baseStyles, variants[variant], className)}
+      {...props}
+    />
+  )
+}
+
+	•	You can now import ButtonVariant in any other file:
+
+import { ButtonVariant } from "@/components/ui/button-variant"
+
+Adding a New Page
+	1.	Create a new file in src/pages. For example, Contact.tsx.
+	2.	Add your page component with any relevant UI or logic.
+	3.	In App.tsx, add a new route pointing to it:
+
+import Contact from "./pages/Contact"
+
+// ...
+
+<Routes>
+  <Route path="/" element={<Index />} />
+  <Route path="/chat" element={<ChatResults />} />
+  <Route path="/contact" element={<Contact />} />
+  <Route path="*" element={<NotFound />} />
+</Routes>
+
+Scripts and Commands
+
+From the project root (where package.json is located):
+	•	npm install
+Installs dependencies.
+	•	npm run dev
+Starts the local development server.
+	•	npm run build
+Builds the application for production.
+	•	npm run preview
+Serves the production build locally for testing.
+
+If you prefer yarn or pnpm, adjust accordingly (e.g., yarn dev or pnpm dev).
+
+Additional Tips
+	1.	Configuration:
+	•	vite.config.ts holds Vite’s configuration.
+	•	tailwind.config.ts for Tailwind customization (colors, spacing, etc.).
+	•	tsconfig.json ensures TypeScript settings are correct.
+	2.	Deployment:
+	•	You can deploy your build output to many hosting providers (e.g., Netlify, Vercel).
+	•	Or, if you’re using Lovable, you can simply publish by going to “Share -> Publish.”
+	3.	Aliases:
+	•	Your project uses some path aliases (e.g., "@/hooks").
+	•	These aliases are configured in components.json and your tsconfig.json.
+	•	For example, import { useToast } from "@/hooks/use-toast"
+	4.	Contribution:
+	•	Always create separate branches or pull requests for new features to keep the main branch clean.
+	•	Review all changes before merging to avoid code conflicts or regressions.
+
+That’s it! You now have a detailed overview of how this project is set up, how to create new components or pages, and how everything is wired together. If you have any questions or need to update instructions, simply edit this cursorrules file.

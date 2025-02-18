@@ -71,15 +71,14 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-purple-200 to-purple-100 text-purple-900">
-      <header className="bg-white/70 backdrop-blur-md border-b border-purple-200 sticky top-0 z-50">
-        <div className="px-5 py-2">
+      <header className="backdrop-blur-md border-b border-purple-200/50 sticky top-0 z-50">
+        <div className="px-5 py-4">
           <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-2">
-              <img src="/lovable-uploads/b7a6d977-e43d-451e-8150-3eb9173e99e2.png" alt="Incepta Logo" className="w-6 h-6 logo-glow" />
-              <span className="text-lg font-semibold">Incepta</span>
+            <div className="flex items-center space-x-3">
+              <img src="/lovable-uploads/b7a6d977-e43d-451e-8150-3eb9173e99e2.png" alt="Incepta Logo" className="w-7 h-7 logo-glow" />
+              <span className="text-xl font-semibold">Incepta</span>
             </div>
-            <div className="flex items-center space-x-6">
-              <Link to="/" className="hover:text-purple-600 transition-colors">Home</Link>
+            <div className="flex items-center space-x-8">
               <Link to="/about" className="hover:text-purple-600 transition-colors">About</Link>
               <Link to="/pricing" className="hover:text-purple-600 transition-colors">Pricing</Link>
               <Link to="/contact" className="hover:text-purple-600 transition-colors">Contact</Link>
@@ -101,7 +100,7 @@ const Index = () => {
             className="w-24 h-24 mx-auto mb-5 logo-glow"
           />
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-3">
-            Idea to funding and technology in seconds
+            Find funding and technology in seconds
           </h1>
           <p className="text-lg md:text-xl text-purple-600 max-w-2xl mx-auto">
             Unlocking Innovation Through Intelligent Search
