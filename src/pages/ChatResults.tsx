@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { Send, ArrowLeft, Search } from "lucide-react";
+import { Send, ArrowLeft, Search, Loader2 } from "lucide-react";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { useToast } from "@/components/ui/use-toast";
 import { prompts } from "@/lib/prompts";
@@ -21,6 +21,7 @@ const ChatResults = () => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [refinement, setRefinement] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [isSearching, setIsSearching] = useState(false);
 
   useEffect(() => {
     if (!searchState?.query) {
@@ -74,6 +75,14 @@ const ChatResults = () => {
 
   const generateAndSearch = async (query: string) => {
     try {
+      // Start query generation loading state
+      const queryGenStartTime = Date.now();
+      setMessages(prev => [...prev, {
+        type: 'system',
+        content: 'Generating relevant search queries to analyze your request...',
+        isSearching: true
+      }]);
+
       // Generate search queries
       const queryGenResponse = await fetch('/api/chat', {
         method: 'POST',
@@ -93,15 +102,25 @@ const ChatResults = () => {
       const queryGenData = await queryGenResponse.json();
       const searchQueries: SearchQueryResponse = JSON.parse(queryGenData.message);
 
-      // Add search queries to messages
+      // Ensure minimum 3 second loading time for query generation
+      const queryGenDuration = Date.now() - queryGenStartTime;
+      if (queryGenDuration < 5000) {
+        await new Promise(resolve => setTimeout(resolve, 5000 - queryGenDuration));
+      }
+
+      // Remove the loading message and show the generated queries
       setMessages(prev => [
-        ...prev,
+        ...prev.filter(msg => !msg.isSearching),
         {
           type: 'system',
-          content: 'Generating targeted search queries...',
+          content: 'Generated targeted search queries:',
           searchQueries: searchQueries.queries
         }
       ]);
+
+      // Start the search loading state
+      setIsSearching(true);
+      const searchStartTime = Date.now();
 
       // Perform parallel searches
       const searchPromises = searchQueries.queries.map(async (searchQuery) => {
@@ -121,9 +140,22 @@ const ChatResults = () => {
         };
       });
 
-      setMessages(prev => [...prev, { type: 'system', content: 'Searching across multiple aspects...' }]);
+      setMessages(prev => [...prev, { 
+        type: 'system', 
+        content: 'Searching across 200+ US universities and research institutions...',
+        isSearching: true
+      }]);
       
       const searchResults = await Promise.all(searchPromises);
+      
+      // Ensure minimum 3 second loading time
+      const searchDuration = Date.now() - searchStartTime;
+      if (searchDuration < 5000) {
+        await new Promise(resolve => setTimeout(resolve, 5000 - searchDuration));
+      }
+
+      // Remove the searching message and add results
+      setMessages(prev => prev.filter(msg => !msg.isSearching));
       
       // Add results message for each query
       searchResults.forEach(({ query, results }) => {
@@ -131,18 +163,20 @@ const ChatResults = () => {
           ...prev,
           {
             type: 'result',
-            content: `Results for: ${query.query}\n${query.explanation}`,
+            content: `Results for: ${query.query}`,
             results: results
           }
         ]);
       });
       
+      setIsSearching(false);
     } catch (error) {
       toast({
         title: "Error",
         description: "Failed to search for technologies. Please try again.",
         variant: "destructive"
       });
+      setIsSearching(false);
     }
   };
 
@@ -195,7 +229,15 @@ const ChatResults = () => {
     }
   };
 
-  const renderMessage = (content: string) => {
+  const renderMessage = (content: string, isSearching?: boolean) => {
+    if (isSearching) {
+      return (
+        <div className="flex items-center space-x-3">
+          <Loader2 className="w-5 h-5 animate-spin text-purple-600" />
+          <span>{content}</span>
+        </div>
+      );
+    }
     return (
       <ReactMarkdown
         components={{
@@ -220,40 +262,34 @@ const ChatResults = () => {
   }
 
   return (
-    <div className="h-screen flex flex-col">
-      <header className="bg-white/70 backdrop-blur-md border-b border-purple-200 sticky top-0 z-50 h-16 flex-shrink-0">
-        <div className="px-6 h-full flex items-center justify-between max-w-7xl mx-auto w-full">
-          <div className="flex items-center space-x-8">
+    <div className="min-h-screen bg-gradient-to-b from-purple-200 to-purple-100 text-purple-900 flex flex-col">
+      <header className="backdrop-blur-md border-b border-purple-200/50">
+        <div className="px-5 py-4">
+          <div className="flex items-center justify-between">
             <Link to="/" className="flex items-center space-x-3">
-              <ArrowLeft className="w-5 h-5 text-purple-900" />
-              <span className="text-purple-900">Back to Home</span>
+              <img src="/lovable-uploads/b7a6d977-e43d-451e-8150-3eb9173e99e2.png" alt="Incepta Logo" className="w-7 h-7 logo-glow" />
+              <span className="text-xl font-semibold">Incepta</span>
             </Link>
-            <Link to="/" className="text-2xl font-bold text-purple-900">
-              Incepta
-            </Link>
+            <div className="flex items-center space-x-8">
+              <Link to="/about" className="hover:text-purple-600 transition-colors">About</Link>
+              <Link to="/pricing" className="hover:text-purple-600 transition-colors">Pricing</Link>
+              <Link to="/contact" className="hover:text-purple-600 transition-colors">Contact</Link>
+            </div>
           </div>
-          
-          <nav className="flex items-center space-x-8">
-            <Link to="/about" className="text-purple-900 hover:text-purple-700 transition-colors">
-              About
-            </Link>
-            <Link to="/pricing" className="text-purple-900 hover:text-purple-700 transition-colors">
-              Pricing
-            </Link>
-            <Link to="/contact" className="text-purple-900 hover:text-purple-700 transition-colors">
-              Contact
-            </Link>
-          </nav>
         </div>
       </header>
 
-      <div className="flex-1 flex flex-col bg-gradient-to-b from-purple-200 to-purple-100 overflow-hidden">
+      <div className="flex-1 overflow-hidden">
         <div className="h-4"></div>
 
-        <div className="flex-1 px-4 sm:px-6 lg:px-8 pb-4 min-h-0">
+        <div className="px-4 sm:px-6 lg:px-8 pb-4 h-[calc(100vh-8.5rem)]">
           <div className="max-w-6xl mx-auto h-full bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl flex flex-col">
-            <ScrollArea className="flex-1 h-full">
-              <div className="p-6 space-y-6">
+            <ScrollArea 
+              className="flex-1 h-full pr-4 [&_.simplebar-scrollbar]:bg-purple-300 [&_.simplebar-scrollbar]:w-2
+                         [&_.simplebar-scrollbar]:hover:bg-purple-400 [&_.simplebar-scrollbar]:transition-colors
+                         [&_.simplebar-scrollbar]:before:bg-current [&_.simplebar-scrollbar]:rounded-full"
+            >
+              <div className="p-6 space-y-6 overflow-y-auto">
                 {messages.map((message, index) => (
                   <div
                     key={index}
@@ -266,7 +302,7 @@ const ChatResults = () => {
                     }`}
                   >
                     <div className="prose prose-sm max-w-none">
-                      {renderMessage(message.content)}
+                      {renderMessage(message.content, message.isSearching)}
                     </div>
                     {message.searchQueries && (
                       <div className="mt-4 space-y-3">
@@ -297,11 +333,6 @@ const ChatResults = () => {
                     )}
                   </div>
                 ))}
-                {isLoading && (
-                  <div className="p-4 rounded-xl bg-gray-200 text-gray-700 max-w-[80%]">
-                    Processing...
-                  </div>
-                )}
               </div>
             </ScrollArea>
 

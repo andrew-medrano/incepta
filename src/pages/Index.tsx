@@ -6,6 +6,11 @@ import { Upload, Search } from "lucide-react";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { useToast } from "@/components/ui/use-toast";
 
+interface Suggestion {
+  display: string;
+  query: string;
+}
+
 const Index = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
@@ -40,24 +45,54 @@ const Index = () => {
     }
   };
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files[0]) {
-      setSelectedFile(e.target.files[0]);
-    }
+  const handleFileUploadClick = () => {
+    toast({
+      title: "Coming Soon",
+      description: "File upload functionality is currently under development.",
+      duration: 3000,
+    });
   };
 
-  const grantSuggestions = [
-    "Renewable energy grants",
-    "Biotech research funding",
-    "AI development grants",
-    "Smart city project funding"
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    // Keep empty to prevent any file handling
+  };
+
+  const grantSuggestions: Suggestion[] = [
+    {
+      display: "Renewable energy grants",
+      query: "Find available research grants and funding opportunities for renewable energy projects, specifically in solar and wind power technologies"
+    },
+    {
+      display: "Biotech research funding",
+      query: "Search for biotechnology research grants and funding programs focused on medical innovations and drug development"
+    },
+    {
+      display: "AI development grants",
+      query: "Locate funding opportunities for artificial intelligence research and development projects, including machine learning applications"
+    },
+    {
+      display: "Smart city project funding",
+      query: "Find government and private sector grants for smart city initiatives, focusing on IoT and urban infrastructure development"
+    }
   ];
 
-  const techSuggestions = [
-    "University patents in AI",
-    "Quantum computing innovations",
-    "Biotech breakthroughs",
-    "Green energy technologies"
+  const techSuggestions: Suggestion[] = [
+    {
+      display: "University patents in AI",
+      query: "Search for university-owned patents related to artificial intelligence, machine learning, and neural networks in the last 5 years"
+    },
+    {
+      display: "Quantum computing innovations",
+      query: "Find recent technological breakthroughs and patent applications in quantum computing hardware and quantum algorithms"
+    },
+    {
+      display: "Biotech breakthroughs",
+      query: "Discover recent biotechnology innovations and patents in gene editing, therapeutic proteins, and synthetic biology"
+    },
+    {
+      display: "Green energy technologies",
+      query: "Search for emerging patents and technologies in renewable energy storage, solar efficiency, and sustainable power generation"
+    }
   ];
 
   const suggestions = mode === "grants" ? grantSuggestions : techSuggestions;
@@ -90,10 +125,10 @@ const Index = () => {
       <header className="backdrop-blur-md border-b border-purple-200/50 sticky top-0 z-50">
         <div className="px-5 py-4">
           <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-3">
+            <Link to="/" className="flex items-center space-x-3">
               <img src="/lovable-uploads/b7a6d977-e43d-451e-8150-3eb9173e99e2.png" alt="Incepta Logo" className="w-7 h-7 logo-glow" />
               <span className="text-xl font-semibold">Incepta</span>
-            </div>
+            </Link>
             <div className="flex items-center space-x-8">
               <Link to="/about" className="hover:text-purple-600 transition-colors">About</Link>
               <Link to="/pricing" className="hover:text-purple-600 transition-colors">Pricing</Link>
@@ -175,18 +210,16 @@ const Index = () => {
                             search-input"
                 />
                 <div className="px-8 pb-2 pt-0 flex items-center justify-between">
-                  <label className="flex items-center space-x-2 cursor-pointer text-purple-700 hover:text-purple-800 transition-colors">
-                    <div className="p-1.5 bg-purple-100 rounded-lg">
+                  <button
+                    onClick={handleFileUploadClick}
+                    type="button"
+                    className="flex items-center space-x-2 text-purple-700/50 hover:text-purple-800/50 transition-colors cursor-not-allowed"
+                  >
+                    <div className="p-1.5 bg-purple-100/50 rounded-lg">
                       <Upload className="w-4 h-4" />
                     </div>
                     <span className="text-sm">Upload file</span>
-                    <input
-                      type="file"
-                      onChange={handleFileChange}
-                      className="hidden"
-                      accept=".pdf,.doc,.docx,.txt"
-                    />
-                  </label>
+                  </button>
                   <button
                     type="submit"
                     disabled={!searchQuery.trim()}
@@ -221,12 +254,12 @@ const Index = () => {
               {suggestions.map((suggestion, index) => (
                 <button
                   key={index}
-                  onClick={() => setSearchQuery(suggestion)}
+                  onClick={() => setSearchQuery(suggestion.query)}
                   className="px-3 py-1.5 bg-white/50 text-purple-700 rounded-lg
                            hover:bg-white/70 transition-colors duration-200 text-xs
                            backdrop-blur-sm border border-purple-300/30"
                 >
-                  {suggestion}
+                  {suggestion.display}
                 </button>
               ))}
             </div>

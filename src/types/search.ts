@@ -22,4 +22,5 @@ export interface Message {
   content: string;
   searchQueries?: SearchQuery[];
   results?: SearchResult[];
+  isSearching?: boolean;
 } 

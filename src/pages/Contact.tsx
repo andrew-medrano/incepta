@@ -8,10 +8,10 @@ const Contact = () => {
       <header className="backdrop-blur-md border-b border-purple-200/50 sticky top-0 z-50">
         <div className="px-5 py-4">
           <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-3">
+            <Link to="/" className="flex items-center space-x-3">
               <img src="/lovable-uploads/b7a6d977-e43d-451e-8150-3eb9173e99e2.png" alt="Incepta Logo" className="w-7 h-7 logo-glow" />
               <span className="text-xl font-semibold">Incepta</span>
-            </div>
+            </Link>
             <div className="flex items-center space-x-8">
               <Link to="/about" className="hover:text-purple-600 transition-colors">About</Link>
               <Link to="/pricing" className="hover:text-purple-600 transition-colors">Pricing</Link>
