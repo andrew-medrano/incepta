@@ -10,6 +10,8 @@ interface SearchResult {
     patents: string;
     llm_summary: string;
     llm_teaser: string;
+    page_url: string;
+    number: string;
   };
   score: number;
 }
@@ -80,6 +82,8 @@ export default async function handler(req: Request) {
         patents: match.metadata.patents,
         llm_summary: match.metadata.llm_summary,
         llm_teaser: match.metadata.llm_teaser,
+        page_url: match.metadata.page_url,
+        number: match.metadata.number,
         score: match.score
       }))
     }), {

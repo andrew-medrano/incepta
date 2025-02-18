@@ -8,12 +8,16 @@ export interface SearchQueryResponse {
 }
 
 export interface SearchResult {
+  id: string;
   title: string;
   university: string;
+  number: string;
   description: string;
+  published_date: string;
   patents: string;
-  llm_summary: string;
-  llm_teaser: string;
+  page_url: string;
+  llm_summary?: string;
+  llm_teaser?: string;
   score: number;
 }
 
