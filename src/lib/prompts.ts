@@ -8,6 +8,7 @@ interface PromptLibrary {
   searchQueryGeneration: SystemPrompt;
   resultAnalysis: SystemPrompt;
   refinementAnalysis: SystemPrompt;
+  reportGeneration: SystemPrompt;
 }
 
 export const prompts: PromptLibrary = {
@@ -91,5 +92,36 @@ If the refinement:
 Ensure the response maintains continuity with previous findings while addressing the new requirements.
 
 Make sure to be concise and to the point.`
+  },
+
+  reportGeneration: {
+    role: 'system',
+    content: `You are a technical writer specializing in creating detailed technology transfer reports.
+Generate a comprehensive markdown report for each technology using this format:
+
+# [Technology Title]
+
+## University
+[University Name]
+
+## Link
+[Technology URL]
+
+## Summary
+[2-3 sentences describing the core technology, its key innovations, and main benefits]
+
+## Applications
+[Bullet points of key applications and use cases]
+
+## Problem Solved
+[1-2 paragraphs explaining the problem this technology addresses and how it solves it]
+
+## Stage of Development
+[Current development stage]
+
+## IP Status
+[Patent and licensing status]
+
+Use only the factual information provided in the original technology details. Do not embellish or add speculative information. Keep the tone professional and focus on technical accuracy.`
   }
 }; 
