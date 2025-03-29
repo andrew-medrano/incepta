@@ -16,7 +16,6 @@ const Index = () => {
   const { toast } = useToast();
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
-  const [mode, setMode] = useState<"grants" | "technology">("technology");
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
@@ -25,24 +24,9 @@ const Index = () => {
     navigate('/chat', { 
       state: { 
         query: searchQuery,
-        file: selectedFile,
-        mode: mode
+        file: selectedFile
       } 
     });
-  };
-
-  const handleModeChange = (value: string | undefined) => {
-    if (value === "grants") {
-      toast({
-        title: "Coming Soon",
-        description: "Grants search is currently under development.",
-        duration: 3000,
-      });
-      return;
-    }
-    if (value) {
-      setMode(value as "grants" | "technology");
-    }
   };
 
   const handleFileUploadClick = () => {
@@ -56,25 +40,6 @@ const Index = () => {
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     // Keep empty to prevent any file handling
   };
-
-  const grantSuggestions: Suggestion[] = [
-    {
-      display: "Renewable energy grants",
-      query: "Find available research grants and funding opportunities for renewable energy projects, specifically in solar and wind power technologies"
-    },
-    {
-      display: "Biotech research funding",
-      query: "Search for biotechnology research grants and funding programs focused on medical innovations and drug development"
-    },
-    {
-      display: "AI development grants",
-      query: "Locate funding opportunities for artificial intelligence research and development projects, including machine learning applications"
-    },
-    {
-      display: "Smart city project funding",
-      query: "Find government and private sector grants for smart city initiatives, focusing on IoT and urban infrastructure development"
-    }
-  ];
 
   const techSuggestions: Suggestion[] = [
     {
@@ -95,30 +60,18 @@ const Index = () => {
     }
   ];
 
-  const suggestions = mode === "grants" ? grantSuggestions : techSuggestions;
+  const suggestions = techSuggestions;
 
-  const typewriterSequences = {
-    grants: [
-      "Ask Incepta to find research grants in renewable energy...",
-      2000,
-      "Ask Incepta to discover funding for AI development...",
-      2000,
-      "Ask Incepta to explore biotech research grants...",
-      2000,
-      "Ask Incepta to find smart city project funding...",
-      2000
-    ],
-    technology: [
-      "Ask Incepta to find AI patents in healthcare...",
-      2000,
-      "Ask Incepta to explore quantum computing innovations...",
-      2000,
-      "Ask Incepta to discover new biotech patents...",
-      2000,
-      "Ask Incepta to analyze emerging technologies...",
-      2000
-    ]
-  };
+  const typewriterSequence = [
+    "Ask Incepta to find AI patents in healthcare...",
+    2000,
+    "Ask Incepta to explore quantum computing innovations...",
+    2000,
+    "Ask Incepta to discover new biotech patents...",
+    2000,
+    "Ask Incepta to analyze emerging technologies...",
+    2000
+  ];
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-purple-200 to-purple-100 text-purple-900">
@@ -131,8 +84,6 @@ const Index = () => {
             </Link>
             <div className="flex items-center space-x-8">
               <Link to="/about" className="hover:text-purple-600 transition-colors">About</Link>
-              <Link to="/pricing" className="hover:text-purple-600 transition-colors">Pricing</Link>
-              <Link to="/contact" className="hover:text-purple-600 transition-colors">Contact</Link>
             </div>
           </div>
         </div>
@@ -151,7 +102,7 @@ const Index = () => {
             className="w-24 h-24 mx-auto mb-5 logo-glow"
           />
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-3">
-            Find funding and technology in seconds
+            Find technology in seconds
           </h1>
           <p className="text-lg md:text-xl text-purple-600 max-w-2xl mx-auto">
             Unlocking Innovation Through Intelligent Search
@@ -166,32 +117,10 @@ const Index = () => {
         >
           <form onSubmit={handleSearch} className="relative">
             <div className="relative group">
-              <div className="flex justify-center mb-3">
-                <ToggleGroup
-                  type="single"
-                  defaultValue="technology"
-                  value={mode}
-                  onValueChange={handleModeChange}
-                  className="bg-white/50 backdrop-blur-sm p-0.5 rounded-lg border border-purple-200"
-                >
-                  <ToggleGroupItem 
-                    value="technology" 
-                    className="w-[100px] px-3 py-1.5 rounded-md data-[state=on]:bg-purple-600 data-[state=on]:text-white text-sm"
-                  >
-                    Technology
-                  </ToggleGroupItem>
-                  <ToggleGroupItem 
-                    value="grants" 
-                    className="w-[100px] px-3 py-1.5 rounded-md data-[state=on]:bg-purple-600 data-[state=on]:text-white text-sm cursor-not-allowed opacity-50"
-                  >
-                    Grants
-                  </ToggleGroupItem>
-                </ToggleGroup>
-              </div>
               <div className="relative bg-white/90 backdrop-blur-sm shadow-2xl rounded-2xl">
                 {searchQuery.length === 0 && (
                   <TypeAnimation
-                    sequence={typewriterSequences[mode]}
+                    sequence={typewriterSequence}
                     wrapper="div"
                     speed={50}
                     repeat={Infinity}

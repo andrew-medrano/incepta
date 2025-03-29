@@ -13,8 +13,6 @@ const About = () => {
             </Link>
             <div className="flex items-center space-x-8">
               <Link to="/about" className="text-purple-600 transition-colors">About</Link>
-              <Link to="/pricing" className="hover:text-purple-600 transition-colors">Pricing</Link>
-              <Link to="/contact" className="hover:text-purple-600 transition-colors">Contact</Link>
             </div>
           </div>
         </div>
@@ -45,15 +43,15 @@ const About = () => {
           className="prose prose-purple mx-auto"
         >
           <p className="text-lg mb-6">
-            Incepta is a cutting-edge search platform designed to bridge the gap between researchers, 
-            innovators, and funding opportunities. Our advanced AI-powered search technology helps you 
-            discover relevant grants, patents, and research opportunities in seconds.
+            Incepta is a cutting-edge search platform designed to bridge the gap between researchers and 
+            innovators. Our advanced AI-powered search technology helps you discover relevant patents and 
+            technologies in seconds.
           </p>
           
           <p className="text-lg">
-            Whether you're a researcher seeking funding, an innovator exploring patents, 
-            or an organization looking to support groundbreaking projects, Incepta provides 
-            the tools and insights you need to make informed decisions and accelerate innovation.
+            Whether you're a researcher exploring new innovations or an organization looking for emerging 
+            technologies, Incepta provides the tools and insights you need to make informed decisions and 
+            accelerate innovation.
           </p>
         </motion.div>
       </div>
