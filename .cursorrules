@@ -26,7 +26,12 @@ Overview of the Stack
 File Map
 
 incepta
-├── .dist            # (Build output or distribution directory, if used)
+├── .dist            # Build output or distribution directory
+├── .vercel          # Vercel deployment configuration
+├── api              # Vercel Edge Functions
+│   ├── chat.ts       # OpenAI chat completion endpoint
+│   └── search.ts     # Pinecone vector search endpoint
+├── docs             # Documentation files
 ├── public
 │   ├── images
 │   │   └── logo.png
@@ -35,7 +40,14 @@ incepta
 │   └── placeholder.svg
 ├── src
 │   ├── components
-│   │   ├── ui
+│   │   ├── chat-results  # Components specific to chat results
+│   │   │   ├── ChatSidebar.tsx
+│   │   │   ├── PDFGenerationDialog.tsx
+│   │   │   ├── ResultCard.tsx
+│   │   │   ├── ResultDetailsDialog.tsx
+│   │   │   ├── SearchResults.tsx
+│   │   │   └── SelectedTechnologies.tsx
+│   │   ├── ui           # shadcn-ui components
 │   │   │   ├── accordion.tsx
 │   │   │   ├── alert-dialog.tsx
 │   │   │   ├── alert.tsx
@@ -85,15 +97,21 @@ incepta
 │   │   │   ├── toggle.tsx
 │   │   │   ├── tooltip.tsx
 │   │   │   └── use-toast.ts
+│   │   └── Header.tsx  # Global header component
 │   ├── hooks
 │   │   ├── use-mobile.tsx
 │   │   └── use-toast.ts
 │   ├── lib
 │   │   └── utils.ts
 │   ├── pages
+│   │   ├── About.tsx
 │   │   ├── ChatResults.tsx
+│   │   ├── Contact.tsx
 │   │   ├── Index.tsx
-│   │   └── NotFound.tsx
+│   │   ├── NotFound.tsx
+│   │   └── Pricing.tsx
+│   ├── types
+│   │   └── search.ts
 │   ├── App.css
 │   ├── App.tsx
 │   ├── index.css
@@ -104,12 +122,14 @@ incepta
 ├── eslint.config.js
 ├── index.html
 ├── package.json
+├── package-lock.json
 ├── postcss.config.js
 ├── README.md
 ├── tailwind.config.ts
 ├── tsconfig.app.json
 ├── tsconfig.json
 ├── tsconfig.node.json
+├── vercel.json
 └── vite.config.ts
 
 Folder-by-Folder Guide
@@ -120,34 +140,44 @@ Folder-by-Folder Guide
 	•	Houses React components.
 	•	Typically, you might group components by domain or usage.
 	•	The ui/ folder includes shadcn-ui-based components (e.g., Buttons, Dialogs, Toasts).
+	•	The chat-results/ folder contains components used in the main chat results page.
 	3.	src/hooks/
 	•	Custom React hooks live here.
 	•	For example, use-mobile.tsx to detect if the user is on a mobile device.
 	4.	src/lib/
-	•	Utility functions or shared logic that doesn’t fit neatly into hooks or components.
+	•	Utility functions or shared logic that doesn't fit neatly into hooks or components.
 	•	Example: utils.ts with cn() function for Tailwind class merging.
 	5.	src/pages/
-	•	Each file in pages represents a “view” or “page” in your app.
+	•	Each file in pages represents a "view" or "page" in your app.
 	•	Routing for these pages is defined in App.tsx using react-router-dom.
-	6.	src/index.css
-	•	Tailwind’s base configuration and custom CSS rules.
+	6.	src/types/
+	•	TypeScript type definitions used throughout the application.
+	•	Contains interface definitions for search results, messages, etc.
+	7.	src/index.css
+	•	Tailwind's base configuration and custom CSS rules.
 	•	Also contains global animations or custom classes.
-	7.	src/App.tsx
+	8.	src/App.tsx
 	•	The root-level React component.
 	•	Incorporates your router, query clients, and UI providers (Toasts, Tooltip, etc.).
-	8.	src/main.tsx
+	9.	src/main.tsx
 	•	The entry point for Vite.
 	•	Mounts the React application onto the #root element in index.html.
-	9.	index.html
+	10.	api/
+	•	Vercel Edge Functions that handle API endpoints.
+	•	chat.ts: Handles communication with OpenAI for chat completions.
+	•	search.ts: Performs vector searches using Pinecone.
+	11.	index.html
 	•	Main HTML template served by Vite.
 
 How Things Link Together
-	•	Routing: Managed by react-router-dom. The <BrowserRouter> in App.tsx defines how we switch between pages like / (Index), /chat (ChatResults), * (NotFound).
+	•	Routing: Managed by react-router-dom. The <BrowserRouter> in App.tsx defines how we switch between pages like / (Index), /chat (ChatResults), /about (About), /pricing (Pricing), /contact (Contact), and * (NotFound).
 	•	UI Components: We use shadcn-ui components found under src/components/ui/. When you need a Button, Dialog, or Toast, import from this folder.
+	•	Chat Results: The ChatResults page uses several specialized components in src/components/chat-results/ for displaying search results, managing selected technologies, and generating PDF reports.
 	•	Custom Hooks: If you have repeated logic (like media queries or toast state), place them in the src/hooks folder. Examples include:
-	•	use-mobile.tsx — A hook to track mobile viewport usage.
-	•	use-toast.ts — A custom toast manager that wraps the shadcn-ui toasts.
+		•	use-mobile.tsx — A hook to track mobile viewport usage.
+		•	use-toast.ts — A custom toast manager that wraps the shadcn-ui toasts.
 	•	State Management: Some global or asynchronous state is managed via React Query (see QueryClient in App.tsx) and useToast for ephemeral messages.
+	•	API Integration: The application communicates with OpenAI and Pinecone via Vercel Edge Functions in the /api directory.
 
 Adding a New UI Component
 
@@ -221,12 +251,12 @@ If you prefer yarn or pnpm, adjust accordingly (e.g., yarn dev or pnpm dev).
 
 Additional Tips
 	1.	Configuration:
-	•	vite.config.ts holds Vite’s configuration.
+	•	vite.config.ts holds Vite's configuration.
 	•	tailwind.config.ts for Tailwind customization (colors, spacing, etc.).
 	•	tsconfig.json ensures TypeScript settings are correct.
 	2.	Deployment:
 	•	You can deploy your build output to many hosting providers (e.g., Netlify, Vercel).
-	•	Or, if you’re using Lovable, you can simply publish by going to “Share -> Publish.”
+	•	Or, if you're using Lovable, you can simply publish by going to "Share -> Publish."
 	3.	Aliases:
 	•	Your project uses some path aliases (e.g., "@/hooks").
 	•	These aliases are configured in components.json and your tsconfig.json.
@@ -235,4 +265,4 @@ Additional Tips
 	•	Always create separate branches or pull requests for new features to keep the main branch clean.
 	•	Review all changes before merging to avoid code conflicts or regressions.
 
-That’s it! You now have a detailed overview of how this project is set up, how to create new components or pages, and how everything is wired together. If you have any questions or need to update instructions, simply edit this cursorrules file.
+That's it! You now have a detailed overview of how this project is set up, how to create new components or pages, and how everything is wired together. If you have any questions or need to update instructions, simply edit this cursorrules file.

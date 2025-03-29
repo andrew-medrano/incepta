@@ -13,7 +13,6 @@ The system implements an intelligent chat-based interface for technology transfe
    - Renders markdown-formatted responses
    - Provides a fixed-position chat input for refinements
    - Handles PDF report generation and download
-   - Toggleable knowledge graph visualization of results
 
 2. **System Prompts (`prompts.ts`)**
    - `queryAnalysis`: Guides initial query understanding (single clarification)
@@ -21,7 +20,6 @@ The system implements an intelligent chat-based interface for technology transfe
    - `resultAnalysis`: Structures search result analysis
    - `refinementAnalysis`: Manages follow-up questions and refinements
    - `reportGeneration`: Formats technology details into structured markdown reports
-   - `graphAnalysis`: Identifies relationships between technologies
 
 3. **API Endpoints**
    - `/api/chat`: Handles LLM interactions
@@ -170,61 +168,6 @@ graph TD
 [Patent and licensing status]
 ```
 
-### 6. Knowledge Graph Visualization
-
-```mermaid
-graph TD
-    A[Search Results] --> B[Toggle View Mode]
-    B -->|Grid| C[Current Card View]
-    B -->|Graph| D[Knowledge Graph View]
-    D --> E[Generate Graph Data]
-    E --> F[Render Interactive Graph]
-    F --> G[Node Click]
-    G --> H[Show Technology Details]
-```
-
-1. User toggles between grid and graph views
-2. System processes technology relationships:
-   - Technical domains
-   - Universities/Institutions
-   - Application areas
-   - Problem spaces
-3. Renders interactive graph:
-   - Technologies as nodes
-   - Relationships as edges
-   - Color coding by category
-   - Size based on relevance
-4. Interactive features:
-   - Zoom and pan
-   - Node selection
-   - Relationship highlighting
-   - Details on demand
-
-### Graph View Structure
-
-```typescript
-interface GraphNode {
-  id: string;
-  label: string;
-  type: 'technology' | 'domain' | 'university' | 'application';
-  data: SearchResult | null; // Full data for technology nodes
-  size: number; // Based on relevance score
-  color: string; // Based on type
-}
-
-interface GraphEdge {
-  source: string;
-  target: string;
-  type: 'belongs_to' | 'related_to' | 'applies_to';
-  weight: number; // Relationship strength
-}
-
-interface GraphData {
-  nodes: GraphNode[];
-  edges: GraphEdge[];
-}
-```
-
 ## Message Types
 
 1. **User Messages**
@@ -332,61 +275,6 @@ const downloadPDF = () => {
   link.download = 'technology-report.pdf';
   link.href = url;
   link.click();
-};
-```
-
-### View Modes
-```typescript
-type ViewMode = 'grid' | 'graph';
-const [viewMode, setViewMode] = useState<ViewMode>('grid');
-
-// Graph state
-interface GraphState {
-  nodes: GraphNode[];
-  edges: GraphEdge[];
-  selectedNode: string | null;
-  highlightedNodes: Set<string>;
-}
-```
-
-### Graph Generation
-```typescript
-const generateGraphData = (results: SearchResult[]): GraphData => {
-  const nodes: GraphNode[] = [];
-  const edges: GraphEdge[] = [];
-  
-  // Create technology nodes
-  results.forEach(result => {
-    nodes.push({
-      id: result.id,
-      label: result.title,
-      type: 'technology',
-      data: result,
-      size: result.score * 10,
-      color: '#6B46C1'
-    });
-    
-    // Add university node and edge
-    const universityId = `uni-${result.university}`;
-    if (!nodes.find(n => n.id === universityId)) {
-      nodes.push({
-        id: universityId,
-        label: result.university,
-        type: 'university',
-        data: null,
-        size: 8,
-        color: '#4B0082'
-      });
-    }
-    edges.push({
-      source: result.id,
-      target: universityId,
-      type: 'belongs_to',
-      weight: 1
-    });
-  });
-  
-  return { nodes, edges };
 };
 ```
 

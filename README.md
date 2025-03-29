@@ -6,7 +6,6 @@ A modern web application for technology transfer and patent search, built with V
 
 - 🔍 Intelligent search across 200+ US universities and research institutions
 - 🤖 AI-powered query analysis and refinement
-- 📊 Interactive knowledge graph visualization
 - 📱 Responsive design for all devices
 - 📄 PDF report generation
 - ⚡ Real-time search results with Edge Functions
@@ -21,7 +20,6 @@ A modern web application for technology transfer and patent search, built with V
 - **Routing**: React Router
 - **Data Fetching**: TanStack React Query
 - **Notifications**: Sonner + shadcn/ui toasts
-- **Graph Visualization**: react-force-graph-2d
 - **PDF Generation**: html2pdf.js
 - **Markdown Rendering**: ReactMarkdown
 - **API Runtime**: Vercel Edge Functions
